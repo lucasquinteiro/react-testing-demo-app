@@ -1,0 +1,8 @@
+@import "../../styles/variables.scss";
+
+.link-button {
+  cursor: pointer;
+  color: $main-green;
+  text-decoration: underline;
+  font-size: 12px;
+}

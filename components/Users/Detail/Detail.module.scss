@@ -1,0 +1,38 @@
+@import "../../../styles/variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px;
+  border-radius: 24px;
+  border: 1px solid $neutral-black;
+  padding: 24px;
+  width: 100%;
+
+  .detail-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 24px;
+  }
+
+  .name {
+    text-align: left;
+    margin: 12px;
+  }
+
+  .photo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+    .photo {
+      height: 50px;
+      width: 50px;
+    }
+  }
+}

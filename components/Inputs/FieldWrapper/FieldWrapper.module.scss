@@ -1,0 +1,19 @@
+@import "../../../styles/variables.scss";
+
+.wrapper-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 12px 0;
+
+  .label {
+    font-size: 14px;
+    color: $neutral-black;
+  }
+
+  .error-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: $feedback-red;
+  }
+}

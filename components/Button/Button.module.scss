@@ -1,0 +1,24 @@
+@import "../../styles/variables.scss";
+
+.button {
+  border: 1px solid $main-green;
+  height: 40px;
+  transition: all 0.3s;
+  background-color: $main-green;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+
+  &:disabled {
+    opacity: 40%;
+    &:hover {
+      border: 1px solid $main-green;
+      background-color: $main-green;
+    }
+  }
+  &:hover {
+    border: 1px solid $highlight-purple;
+    background-color: $highlight-purple;
+  }
+}

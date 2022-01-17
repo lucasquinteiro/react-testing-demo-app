@@ -1,0 +1,14 @@
+@import "../../../styles/variables.scss";
+
+.input {
+  flex: 1;
+  margin: 8px 0;
+  margin-bottom: 4px;
+  padding: 12px;
+  padding-left: 16px;
+  background: transparent;
+  transition: all 0.3s;
+  color: $neutral-black;
+  border-radius: 8px;
+  border: 2px solid $highlight-purple;
+}
