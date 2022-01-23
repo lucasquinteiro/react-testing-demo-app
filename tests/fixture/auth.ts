@@ -18,4 +18,6 @@ const successLoginResponse = {
   },
 };
 
-export { failedLoginResponse, successLoginResponse };
+const credentials = { email: "user@test.com", password: "Test1234" };
+
+export { failedLoginResponse, successLoginResponse, credentials };

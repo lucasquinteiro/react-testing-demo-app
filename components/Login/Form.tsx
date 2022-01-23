@@ -24,8 +24,16 @@ interface Props {
 }
 
 const LoginForm: React.FC<Props> = ({ onSubmit }) => {
-  const handleSubmit = (values: FormValuesProps) => {
-    onSubmit(values);
+  const handleSubmit = async (
+    values: FormValuesProps,
+    { resetForm, setFieldError }: any
+  ) => {
+    try {
+      await onSubmit(values);
+      resetForm();
+    } catch (err: any) {
+      setFieldError("password", err.message);
+    }
   };
 
   return (
