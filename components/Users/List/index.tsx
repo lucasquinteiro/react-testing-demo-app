@@ -12,7 +12,7 @@ const List: React.FC<Props> = ({ users }) => {
     <div className={classes.container}>
       <h2>Users</h2>
       {users.map((user: any) => (
-        <Detail user={user} />
+        <Detail user={user} key={user.id} />
       ))}
     </div>
   );

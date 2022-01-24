@@ -1,12 +1,12 @@
 import { users as sampleUsers } from "../../tests/fixture/users";
 import { Detail } from "../../components/Users";
-import MainLayout from "../../layouts/MainLayout";
+import LoggedLayout from "../../layouts/LoggedLayout";
 
 const UsersPage = () => {
   return (
-    <MainLayout>
+    <LoggedLayout>
       <Detail user={sampleUsers[0]} extended />
-    </MainLayout>
+    </LoggedLayout>
   );
 };
 

@@ -51,7 +51,7 @@ const ResumedDetail: React.FC<UserProps> = ({ id, name }) => {
   const handleRedirectToDetails = () => router.push(`/users/${id}`);
 
   return (
-    <div className={classes.container}>
+    <div className={classes.container} data-testid={`user-item-${id}`}>
       <div className={classes["photo-container"]}>
         <Image
           src="/profile-sample.jpeg"
@@ -61,9 +61,13 @@ const ResumedDetail: React.FC<UserProps> = ({ id, name }) => {
         />
       </div>
 
-      <p className={classes.name}>{name}</p>
+      <p className={classes.name} data-testid={`user-name-${id}`}>
+        {name}
+      </p>
 
-      <LinkButton onClick={handleRedirectToDetails}>View Details</LinkButton>
+      <LinkButton onClick={handleRedirectToDetails} id={id}>
+        View Details
+      </LinkButton>
     </div>
   );
 };

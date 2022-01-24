@@ -29,5 +29,5 @@ module.exports = {
   ],
   // setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   moduleDirectories: ["node_modules", "src"],
-  setupFilesAfterEnv: ["<rootDir>/tests/setupTests.ts"],
+  setupFilesAfterEnv: ["<rootDir>/tests/setup/index.ts"],
 };

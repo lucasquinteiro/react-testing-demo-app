@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { login, LoginRequestBodyProps } from "../api/auth";
 
 import { Form } from "../components/Login";
-import MainLayout from "../layouts/MainLayout";
+import UnloggedLayout from "../layouts/UnloggedLayout";
 import handleSignin from "../lib/handleSignin";
 
 const Home: NextPage = () => {
@@ -19,9 +19,9 @@ const Home: NextPage = () => {
   };
 
   return (
-    <MainLayout>
+    <UnloggedLayout>
       <Form onSubmit={handleSubmit} />
-    </MainLayout>
+    </UnloggedLayout>
   );
 };
 

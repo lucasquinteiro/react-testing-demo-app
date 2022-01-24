@@ -3,15 +3,12 @@ import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useRouter } from "next/router";
 import "@testing-library/jest-dom";
+import { rest } from "msw";
 
-import { credentials } from "./fixture/auth";
+import { credentials, failedLoginResponse } from "./fixture/auth";
 import * as authModule from "../api/auth";
 import LoginPage from "../pages/index";
-
-jest.mock("next/router", () => ({
-  __esModule: true,
-  useRouter: jest.fn(),
-}));
+import { server } from "./mocks/msw-server";
 
 const mockRouter = {
   route: "/",
@@ -76,9 +73,8 @@ describe("LoginPage", () => {
 
   test("should submit the login request correctly", async () => {
     const { getByTestId } = render(<LoginPage />);
-    jest.spyOn(authModule, "login");
-
     const { emailInput, passwordInput, submitButton } = getInputs(getByTestId);
+    jest.spyOn(authModule, "login");
 
     expect(submitButton).toBeDisabled();
 
@@ -93,5 +89,37 @@ describe("LoginPage", () => {
 
     await waitFor(() => expect(authModule.login).toBeCalledWith(credentials));
     await waitFor(() => expect(mockRouter.push).toBeCalledWith("/users"));
+  });
+
+  test("should show error message if the login credentials are wrong and request fails", async () => {
+    const { getByTestId, findByText } = render(<LoginPage />);
+    const { emailInput, passwordInput, submitButton } = getInputs(getByTestId);
+    jest.spyOn(authModule, "login");
+
+    expect(submitButton).toBeDisabled();
+
+    server.use(
+      rest.post(
+        "http://restapi.adequateshop.com/api/authaccount/login",
+        (req, res, ctx) => {
+          return res.once(ctx.json({ ...failedLoginResponse }));
+        }
+      )
+    );
+
+    await waitFor(async () => {
+      await userEvent.type(emailInput, credentials.email, { delay: 0.5 });
+      await userEvent.type(passwordInput, credentials.password, {
+        delay: 0.5,
+      });
+      expect(submitButton).not.toBeDisabled();
+      await userEvent.click(submitButton);
+    });
+
+    await waitFor(() => expect(authModule.login).toBeCalledWith(credentials));
+
+    // findByText will throw an error if it cannot find the element,
+    // so there is no need to assess for the element to be truthy or the element text content
+    await findByText(failedLoginResponse.message);
   });
 });
