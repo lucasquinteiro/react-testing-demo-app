@@ -5,7 +5,7 @@ import LoggedLayout from "../../layouts/LoggedLayout";
 const UsersPage = () => {
   return (
     <LoggedLayout>
-      <Detail user={sampleUsers[0]} extended />
+      <Detail user={sampleUsers.data[0]} extended />
     </LoggedLayout>
   );
 };

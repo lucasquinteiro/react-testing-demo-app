@@ -19,6 +19,28 @@ const mockRouter = {
 (useRouter as jest.Mock).mockReturnValue(mockRouter);
 
 describe("LoginPage", () => {
+  const queryInputs = (queryByTestId: any) => {
+    const emailInput = queryByTestId("text-field-email");
+    const passwordInput = queryByTestId("text-field-password");
+    const submitButton = queryByTestId("button-submit-login");
+
+    return {
+      emailInput,
+      passwordInput,
+      submitButton,
+    };
+  };
+
+  test("should render all the inputs (using queryBy)", () => {
+    const { queryByTestId } = render(<LoginPage />);
+    const { emailInput, passwordInput, submitButton } =
+      queryInputs(queryByTestId);
+
+    expect(emailInput).toBeTruthy();
+    expect(passwordInput).toBeTruthy();
+    expect(submitButton).toBeTruthy();
+  });
+
   const getInputs = (getByTestId: any) => {
     const emailInput = getByTestId("text-field-email");
     const passwordInput = getByTestId("text-field-password");
@@ -31,17 +53,13 @@ describe("LoginPage", () => {
     };
   };
 
-  test("should render all the inputs", () => {
+  test("should render all the inputs (using getBy)", () => {
     const { getByTestId } = render(<LoginPage />);
-    const { emailInput, passwordInput, submitButton } = getInputs(getByTestId);
-
-    expect(emailInput).toBeTruthy();
-    expect(passwordInput).toBeTruthy();
-    expect(submitButton).toBeTruthy();
+    getInputs(getByTestId);
   });
 
   test("should show errors and button disabled", async () => {
-    const { getByTestId, findByTestId } = render(<LoginPage />);
+    const { getByTestId, findByTestId, findByText } = render(<LoginPage />);
     const { emailInput, passwordInput, submitButton } = getInputs(getByTestId);
 
     // we input invalid data in each input
@@ -50,11 +68,9 @@ describe("LoginPage", () => {
       await userEvent.type(passwordInput, "asd", { delay: 0.5 });
       await userEvent.click(submitButton);
 
-      const passwordError = await findByTestId("text-field-error-password");
-      const emailError = await findByTestId("text-field-error-email");
+      await findByText("Invalid email");
+      await findByText("Too Short!");
 
-      expect(passwordError).toHaveTextContent("Too Short!");
-      expect(emailError).toHaveTextContent("Invalid email");
       expect(submitButton).toBeDisabled();
     });
 
