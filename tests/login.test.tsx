@@ -116,7 +116,7 @@ describe("LoginPage", () => {
 
     server.use(
       rest.post(
-        "http://restapi.adequateshop.com/api/authaccount/login",
+        `${process.env.NEXT_PUBLIC_API_HOST}api/login`,
         (req, res, ctx) => {
           return res.once(ctx.json({ ...failedLoginResponse }));
         }

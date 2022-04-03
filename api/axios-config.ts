@@ -1,7 +1,7 @@
 import axios from "axios";
 
-var axiosInstance = axios.create({
-  baseURL: "http://restapi.adequateshop.com/api/",
+const axiosInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_HOST,
 });
 
 export default axiosInstance;

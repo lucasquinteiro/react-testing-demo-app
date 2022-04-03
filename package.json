@@ -9,6 +9,7 @@
     "test-all": "jest --runInBand --detectOpenHandles"
   },
   "dependencies": {
+    "@next/env": "^12.1.4",
     "axios": "^0.24.0",
     "bluebird": "^3.7.2",
     "formik": "^2.2.9",

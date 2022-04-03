@@ -8,7 +8,7 @@ const Button: React.FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
 }) => {
   return (
     <button
-      data-testid={`button-${id}`}
+      data-testid={`button${id ? `-${id}`: ''}`}
       tabIndex={0}
       className={`${classes.button}`}
       {...props}

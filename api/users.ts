@@ -2,7 +2,7 @@ import axios from "./axios-config";
 
 const getUsers = async () => {
   const token = localStorage.getItem("token");
-  const response = await axios.get("/users?page=1", {
+  const response = await axios.get("api/users", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -13,4 +13,15 @@ const getUsers = async () => {
   return response.data.data;
 };
 
-export { getUsers };
+const getUser = async (id: string) => {
+  const token = localStorage.getItem("token");
+  const response = await axios.get(`api/user?id=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data.data;
+};
+
+export { getUsers, getUser };

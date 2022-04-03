@@ -6,7 +6,7 @@ export interface LoginRequestBodyProps {
 }
 
 const login = async ({ email, password }: LoginRequestBodyProps) => {
-  const response = await axios.post("/authaccount/login", { email, password });
+  const response = await axios.post("api/login", { email, password });
   if (!response.data.data) {
     throw new Error(response.data.message);
   }
