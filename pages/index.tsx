@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { login, LoginRequestBodyProps } from "../api/auth";
 
@@ -21,6 +22,9 @@ const Home: NextPage = () => {
   return (
     <UnloggedLayout>
       <Form onSubmit={handleSubmit} />
+      <Link href="/register">
+        <a style={{marginTop: '24px', textDecoration: 'underline'}}>Register</a>
+      </Link>
     </UnloggedLayout>
   );
 };

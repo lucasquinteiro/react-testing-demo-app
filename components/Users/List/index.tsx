@@ -10,7 +10,6 @@ interface Props {
 const List: React.FC<Props> = ({ users }) => {
   return (
     <div className={classes.container}>
-      <h2>Users</h2>
       {users.map((user: any) => (
         <Detail user={user} key={user.id} />
       ))}

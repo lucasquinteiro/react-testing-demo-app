@@ -19,7 +19,7 @@ const mockRouter = {
 (useRouter as jest.Mock).mockReturnValue(mockRouter);
 
 describe("LoginPage", () => {
-  const queryInputs = (queryByTestId: any) => {
+  const queryElements = (queryByTestId: any) => {
     const emailInput = queryByTestId("text-field-email");
     const passwordInput = queryByTestId("text-field-password");
     const submitButton = queryByTestId("button-submit-login");
@@ -33,15 +33,14 @@ describe("LoginPage", () => {
 
   test("should render all the inputs (using queryBy)", () => {
     const { queryByTestId } = render(<LoginPage />);
-    const { emailInput, passwordInput, submitButton } =
-      queryInputs(queryByTestId);
+    const { emailInput, passwordInput, submitButton } = queryElements(queryByTestId);
 
     expect(emailInput).toBeTruthy();
     expect(passwordInput).toBeTruthy();
     expect(submitButton).toBeTruthy();
   });
 
-  const getInputs = (getByTestId: any) => {
+  const getElements = (getByTestId: any) => {
     const emailInput = getByTestId("text-field-email");
     const passwordInput = getByTestId("text-field-password");
     const submitButton = getByTestId("button-submit-login");
@@ -55,12 +54,12 @@ describe("LoginPage", () => {
 
   test("should render all the inputs (using getBy)", () => {
     const { getByTestId } = render(<LoginPage />);
-    getInputs(getByTestId);
+    getElements(getByTestId);
   });
 
   test("should show errors and button disabled", async () => {
     const { getByTestId, findByTestId, findByText } = render(<LoginPage />);
-    const { emailInput, passwordInput, submitButton } = getInputs(getByTestId);
+    const { emailInput, passwordInput, submitButton } = getElements(getByTestId);
 
     // we input invalid data in each input
     await waitFor(async () => {
@@ -70,8 +69,6 @@ describe("LoginPage", () => {
 
       await findByText("Invalid email");
       await findByText("Too Short!");
-
-      expect(submitButton).toBeDisabled();
     });
 
     // we clear the inputs and should see a "Required" error for each one
@@ -89,17 +86,14 @@ describe("LoginPage", () => {
 
   test("should submit the login request correctly", async () => {
     const { getByTestId } = render(<LoginPage />);
-    const { emailInput, passwordInput, submitButton } = getInputs(getByTestId);
+    const { emailInput, passwordInput, submitButton } = getElements(getByTestId);
     jest.spyOn(authModule, "login");
-
-    expect(submitButton).toBeDisabled();
 
     await waitFor(async () => {
       await userEvent.type(emailInput, credentials.email, { delay: 0.5 });
       await userEvent.type(passwordInput, credentials.password, {
         delay: 0.5,
       });
-      expect(submitButton).not.toBeDisabled();
       await userEvent.click(submitButton);
     });
 
@@ -109,10 +103,8 @@ describe("LoginPage", () => {
 
   test("should show error message if the login credentials are wrong and request fails", async () => {
     const { getByTestId, findByText } = render(<LoginPage />);
-    const { emailInput, passwordInput, submitButton } = getInputs(getByTestId);
+    const { emailInput, passwordInput, submitButton } = getElements(getByTestId);
     jest.spyOn(authModule, "login");
-
-    expect(submitButton).toBeDisabled();
 
     server.use(
       rest.post(
@@ -128,7 +120,6 @@ describe("LoginPage", () => {
       await userEvent.type(passwordInput, credentials.password, {
         delay: 0.5,
       });
-      expect(submitButton).not.toBeDisabled();
       await userEvent.click(submitButton);
     });
 

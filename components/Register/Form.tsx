@@ -41,7 +41,7 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
     >
       {(props) => (
         <Form style={{ width: "50%" }}>
-          <h2 style={{ textAlign: "center" }}>Register</h2>
+          <h2 style={{ textAlign: "center", letterSpacing: '2px' }}>REGISTER</h2>
           <TextField
             placeholder="Your Name"
             id="name"
@@ -65,7 +65,6 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
           <Button
             id="submit-register"
             type="submit"
-            disabled={!(props.isValid && props.dirty)}
             style={{ marginTop: "32px" }}
           >
             Register

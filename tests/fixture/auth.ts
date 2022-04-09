@@ -18,6 +18,10 @@ const successLoginResponse = {
   },
 };
 
+const successRegisterResponse = {
+  data:{message: 'User registered successfully!'}
+}
+
 const credentials = { email: "user@test.com", password: "Test1234" };
 
-export { failedLoginResponse, successLoginResponse, credentials };
+export { failedLoginResponse, successLoginResponse, successRegisterResponse, credentials };

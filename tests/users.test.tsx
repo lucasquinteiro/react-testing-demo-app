@@ -11,8 +11,8 @@ import { users } from "./fixture/users";
 import UsersPage from "../pages/users";
 
 const mockRouter = {
-  route: "/",
-  pathname: "/",
+  route: "/users",
+  pathname: "/users",
   push: jest.fn(),
   query: {},
 };
@@ -24,10 +24,11 @@ describe("UsersPage", () => {
   });
 
   test("should show all the users fetched from the API", async () => {
-    const { findByTestId, getByText } = render(<UsersPage />);
+    const { findByTestId, getByText, debug } = render(<UsersPage />);
 
     // You can make sure it is rendering the title because getByText will fail if it cannot find "Users"
-    getByText("Users");
+    // NOTICE that you CAN use regex here!
+    getByText(/users/i);
 
     const assertRow = async (user: any) => {
       // We need to use findByTestId instead of getByTestId
@@ -37,6 +38,9 @@ describe("UsersPage", () => {
       await findByTestId(`user-item-${user.id}`);
       const userNameText = await findByTestId(`user-name-${user.id}`);
       expect(userNameText).toHaveTextContent(user.name);
+
+      // prints to console how our component looks at any given time.
+      // debug()
     };
 
     // A simple map will generate overlapping act() calls
@@ -50,7 +54,7 @@ describe("UsersPage", () => {
     // });
     // await Promise.all(promises);
 
-    // we can use bluebird's Promise to achieve this
+    // we can use bluebird's .mapSeries to achieve this
     await Promise.mapSeries(users.data, assertRow);
   });
 

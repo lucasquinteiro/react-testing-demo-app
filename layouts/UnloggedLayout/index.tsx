@@ -5,13 +5,10 @@ import classes from "./UnloggedLayout.module.scss";
 
 const UnloggedLayout: React.FC = ({ children }) => {
   return (
-    <>
+    <div className={classes.container}>
       <Navbar />
-      <div className={classes.container}>
-        
-        <div className={classes.content}>{children}</div>
-      </div>
-    </>
+      <div className={classes.content}>{children}</div>  
+    </div>
   );
 };
 

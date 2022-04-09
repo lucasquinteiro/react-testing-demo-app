@@ -44,7 +44,7 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
     >
       {(props) => (
         <Form style={{ width: "50%" }} autoComplete="off">
-          <h2 style={{ textAlign: "center" }}>Login</h2>
+          <h2 style={{ textAlign: "center", letterSpacing: '2px' }}>LOGIN</h2>
           <TextField
             id="email"
             type="email"
@@ -60,7 +60,7 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
           <Button
             id="submit-login"
             type="submit"
-            disabled={!(props.isValid && props.dirty)}
+            disabled={!(props.isValid)}
             style={{ marginTop: "32px" }}
           >
             Sign In
