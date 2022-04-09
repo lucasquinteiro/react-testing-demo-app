@@ -21,8 +21,6 @@ interface Props {
 
 const ExtendedDetail: React.FC<UserProps> = ({ name, email, location }) => {
   return (
-    <>
-      <h2>User Details</h2>
       <div
         className={classes.container}
         style={{ justifyContent: "flex-start" }}
@@ -42,7 +40,6 @@ const ExtendedDetail: React.FC<UserProps> = ({ name, email, location }) => {
           <p className={classes.name}>Location: {location}</p>
         </div>
       </div>
-    </>
   );
 };
 
