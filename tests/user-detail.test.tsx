@@ -13,7 +13,7 @@ const mockRouter = {
   route: "/users/:id",
   pathname: "/users/:id",
   push: jest.fn(),
-  query: { id: 23 },
+  query: { id: users.data[0].id },
 };
 (useRouter as jest.Mock).mockReturnValue(mockRouter);
 
@@ -24,7 +24,7 @@ describe("UserDetailsPage", () => {
 
   test("should show all the user data matching with the user id", async () => {
     const { findByText } = render(<UserDetailsPage />);
-    const testUser = users.data.find(({id}) => id === 23)
+    const testUser = users.data.find(({id}) => id === users.data[0].id)
 
     await findByText(`Name: ${testUser?.name}`)
     await findByText(`Email: ${testUser?.email}`)

@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { useRouter } from "next/router";
 import "@testing-library/jest-dom";
 
-import { credentials } from "./fixture/auth";
+import { sampleRegister } from "./fixture/auth";
 import * as authModule from "../api/auth";
 import RegisterPage from "../pages/register";
 
@@ -66,20 +66,27 @@ describe("Register", () => {
   });
 
   test("should submit the login request correctly", async () => {
-    const { getByTestId } = render(<RegisterPage />);
+    const { getByTestId, findByTestId } = render(<RegisterPage />);
     const { emailInput, passwordInput,nameInput,  submitButton } = getInputs(getByTestId);
     jest.spyOn(authModule, "register");
 
     await waitFor(async () => {
-      await userEvent.type(nameInput, "Lucas", { delay: 0.5 });
-      await userEvent.type(emailInput, credentials.email, { delay: 0.5 });
-      await userEvent.type(passwordInput, credentials.password, {
+      await userEvent.type(nameInput, sampleRegister.name, { delay: 0.5 });
+      await userEvent.type(emailInput, sampleRegister.email, { delay: 0.5 });
+      await userEvent.type(passwordInput, sampleRegister.password, {
         delay: 0.5,
       });
       await userEvent.click(submitButton);
     });
 
-    await waitFor(() => expect(authModule.register).toBeCalledWith({...credentials, name: 'Lucas'}));
-    await waitFor(() => expect(mockRouter.push).toBeCalledWith("/"));
+    await waitFor(() => expect(authModule.register).toBeCalledWith({...sampleRegister}));
+
+    const successToast = await findByTestId('success-toast')
+
+    // we can use a regex to avoid the case sensitive
+    expect(successToast).toHaveTextContent(/User Registered!/i)
+
+    // we can add a timeout to extend the time we are going to wait for this to happen
+    await waitFor(() => expect(mockRouter.push).toBeCalledWith("/"), { timeout: 3000 });
   });
 });

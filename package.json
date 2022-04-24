@@ -20,6 +20,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@jackfranklin/test-data-bot": "^2.0.0",
     "@svgr/webpack": "^6.2.1",
     "@testing-library/dom": "^8.11.2",
     "@testing-library/jest-dom": "^5.14.1",

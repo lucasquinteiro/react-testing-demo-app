@@ -1,0 +1,29 @@
+@import "../../styles/variables.scss";
+
+.toast {
+    &__container {
+      position: fixed;
+      bottom: 0;
+      width: 40%;
+      left: 30%;
+      z-index: 350;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+  
+      &--success {
+        background-color: $highlight-purple;
+      }
+  
+      &--error {
+        background-color: $feedback-red;
+      }
+    }
+  
+    &__content {
+      color: white;
+    }
+  
+  }
+  

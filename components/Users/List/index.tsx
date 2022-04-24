@@ -3,8 +3,7 @@ import Detail, { UserProps } from "../Detail";
 import classes from "./List.module.scss";
 
 interface Props {
-  //   users: Array<UserProps>;
-  users: any;
+    users: Array<UserProps>;
 }
 
 const List: React.FC<Props> = ({ users }) => {

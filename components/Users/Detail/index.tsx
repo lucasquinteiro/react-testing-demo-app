@@ -10,8 +10,7 @@ export interface UserProps {
   name: string;
   email: string;
   location: string;
-  createdat: string;
-  profilepicture: string;
+  profileImage: string;
 }
 
 interface Props {
@@ -19,7 +18,7 @@ interface Props {
   extended?: boolean;
 }
 
-const ExtendedDetail: React.FC<UserProps> = ({ name, email, location }) => {
+const ExtendedDetail: React.FC<UserProps> = ({id, name, email, profileImage, location }) => {
   return (
       <div
         className={classes.container}
@@ -27,10 +26,12 @@ const ExtendedDetail: React.FC<UserProps> = ({ name, email, location }) => {
       >
         <div className={classes["photo-container"]}>
           <Image
-            src="/profile-sample.jpeg"
+            alt={`profile-${id}`}
+            src={profileImage}
             height="100px"
             width="100px"
             className={classes.photo}
+            layout="intrinsic"
           />
         </div>
 
@@ -43,7 +44,7 @@ const ExtendedDetail: React.FC<UserProps> = ({ name, email, location }) => {
   );
 };
 
-const ResumedDetail: React.FC<UserProps> = ({ id, name }) => {
+const ResumedDetail: React.FC<UserProps> = ({ id, name, profileImage }) => {
   const router = useRouter();
   const handleRedirectToDetails = () => router.push(`/users/${id}`);
 
@@ -51,7 +52,8 @@ const ResumedDetail: React.FC<UserProps> = ({ id, name }) => {
     <div className={classes.container} data-testid={`user-item-${id}`}>
       <div className={classes["photo-container"]}>
         <Image
-          src="/profile-sample.jpeg"
+          alt={`profile-${id}`}
+          src={profileImage}
           height="50px"
           width="50px"
           className={classes.photo}

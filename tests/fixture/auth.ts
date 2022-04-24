@@ -24,4 +24,6 @@ const successRegisterResponse = {
 
 const credentials = { email: "user@test.com", password: "Test1234" };
 
-export { failedLoginResponse, successLoginResponse, successRegisterResponse, credentials };
+const sampleRegister = {...credentials, name: 'Lucas'}
+
+export { failedLoginResponse, successLoginResponse, successRegisterResponse, credentials, sampleRegister };

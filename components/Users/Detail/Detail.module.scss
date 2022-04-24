@@ -26,6 +26,7 @@
 
   .photo-container {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     overflow: hidden;
@@ -33,6 +34,8 @@
     .photo {
       height: 50px;
       width: 50px;
+      object-fit: cover;
+
     }
   }
 }

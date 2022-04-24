@@ -28,7 +28,7 @@ describe("UsersPage", () => {
 
     // You can make sure it is rendering the title because getByText will fail if it cannot find "Users"
     // NOTICE that you CAN use regex here!
-    getByText(/users/i);
+    // getByText(/users/i);
 
     const assertRow = async (user: any) => {
       // We need to use findByTestId instead of getByTestId
