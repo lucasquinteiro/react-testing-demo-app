@@ -24,11 +24,7 @@ describe("UsersPage", () => {
   });
 
   test("should show all the users fetched from the API", async () => {
-    const { findByTestId, getByText, debug } = render(<UsersPage />);
-
-    // You can make sure it is rendering the title because getByText will fail if it cannot find "Users"
-    // NOTICE that you CAN use regex here!
-    // getByText(/users/i);
+    const { findByTestId } = render(<UsersPage />);
 
     const assertRow = async (user: any) => {
       // We need to use findByTestId instead of getByTestId
